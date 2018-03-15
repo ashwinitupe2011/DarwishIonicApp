@@ -1,0 +1,34 @@
+<!--
+  Generated template for the OrderDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Order Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+    <ion-list class="accordion-list">
+        <ion-list-header  *ngFor="let p of items; let i = index"  no-padding>
+
+          <button detail-none (click)="sectionToggle(i)" class="section-active">
+              <ion-icon item-left name="arrow-forward" *ngIf="!p.open"></ion-icon>
+              <ion-icon item-left name="arrow-down" *ngIf="p.open"></ion-icon>
+        {{p.ReportDate}}
+      </button>
+        <ion-list  *ngIf="p.ReportDate && p.open" no-lines>
+          <ion-item *ngFor="let s of p.List;let j = index" text-wrap >
+            <ion-card>
+                <ion-item style="font-size: 1.3rem">Total Price : {{s.LabNo}} Rs</ion-item>
+                <ion-item style="font-size: 1.3rem">Ordered Date :{{s.date}} </ion-item>
+            </ion-card>
+          </ion-item>
+        </ion-list>
+        </ion-list-header>
+    </ion-list>
+</ion-content>
+  

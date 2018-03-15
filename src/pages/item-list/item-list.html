@@ -1,0 +1,36 @@
+<!--
+  Generated template for the ItemListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Item List</ion-title>
+    <ion-buttons end> <button ion-button class="submit-btn"  (click)="openInvoice()"> Order </button> </ion-buttons> 
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+ 
+  <ion-list padding>
+      <ion-item *ngFor="let item of items">
+        <ion-card>
+            <ion-row>
+                <ion-col><ion-item><ion-checkbox color="primaryDark"></ion-checkbox></ion-item></ion-col>
+                <ion-col><ion-item>{{item.title}}</ion-item> </ion-col>
+            </ion-row>
+            <div class="item row" > 
+              <span align="left" class="col col-50">{{item.price}}</span>
+              <span align="right" class="col col-50">{{item.availableQuantity}}</span>
+            </div>
+        </ion-card>
+         
+      </ion-item>
+  </ion-list>
+
+</ion-content>
