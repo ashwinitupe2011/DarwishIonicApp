@@ -4,33 +4,56 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title>Item List</ion-title>
     <ion-buttons end> <button ion-button class="submit-btn"  (click)="openInvoice()"> Order </button> </ion-buttons> 
   </ion-navbar>
 
+</ion-header> -->
+
+
+<ion-header>
+    <ion-navbar color="primaryDark">
+        <ion-title>Item List</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
-<ion-content >
-  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
- 
-  <ion-list padding>
-      <ion-item *ngFor="let item of items">
-        <ion-card>
-            <ion-row>
-                <ion-col><ion-item><ion-checkbox color="primaryDark"></ion-checkbox></ion-item></ion-col>
-                <ion-col><ion-item>{{item.title}}</ion-item> </ion-col>
-            </ion-row>
-            <div class="item row" > 
-              <span align="left" class="col col-50">{{item.price}}</span>
-              <span align="right" class="col col-50">{{item.availableQuantity}}</span>
-            </div>
-        </ion-card>
-         
-      </ion-item>
-  </ion-list>
+<ion-content class="page-background transparent-header" >
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+
+    <div class="welcome-header">
+        <div class="content">
+          <div class="title">Item List</div>
+          <div class="subtitle">Find The latest info of item price and quantity available</div>
+        </div>
+        <button ion-fab color="dark" (click)="openInvoice()" class="refresh"><ion-icon name="md-add" ></ion-icon></button>
+      </div>
+
+  <div class="body" padding>
+      <div class="currencies">
+        <ion-row class="currency" *ngFor="let item of items">
+
+              <ion-col style="margin: 5px;" col-1>
+                  <ion-checkbox></ion-checkbox>
+                </ion-col>
+
+          <ion-col col-4 class="text">
+            <p class="rank">Item Code </p>
+            <p class="rank">Item Price</p>
+            <p class="rank">Item Quantity</p>
+          </ion-col>
+       
+
+          <ion-col col-4 class="text">
+              <p class="name">{{item.title}}</p>
+            <p class="evolution" >{{item.price}}</p>
+              <p class="evolution">{{item.availableQuantity}}</p>
+            </ion-col>
+        </ion-row>
+      </div>
+    </div>
 
 </ion-content>

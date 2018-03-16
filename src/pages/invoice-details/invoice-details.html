@@ -5,13 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Quote Details</ion-title>
-   
-  </ion-navbar>
-
-</ion-header>
+        <ion-navbar color="primaryDark">
+            <ion-title>Quote Details</ion-title>
+        </ion-navbar>
+    </ion-header>
 
 
 <ion-content padding>
@@ -86,5 +83,5 @@
         </tr>
     </table>
 </div>
-<button ion-button class="submit-btn"  (click)="onSuccess()" >Place Order</button>
+<button ion-button class="login-button" (click)="confirmOrderDetails()">Place Order</button>
 </ion-content>

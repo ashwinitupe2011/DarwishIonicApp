@@ -27,7 +27,6 @@ import { InvoiceSuccessPage } from '../pages/invoice-success/invoice-success';
     LoginPage,
     InvoiceDetailsPage,
     InvoiceSuccessPage
-    
   ],
   imports: [
     BrowserModule,
@@ -42,7 +41,8 @@ import { InvoiceSuccessPage } from '../pages/invoice-success/invoice-success';
     OrderDetailsPage,
     ItemListPage,
     LoginPage,
-    InvoiceDetailsPage
+    InvoiceDetailsPage,
+    InvoiceSuccessPage
   ],
   providers: [
     StatusBar,

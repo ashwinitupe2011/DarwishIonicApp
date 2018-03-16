@@ -19,12 +19,12 @@ export class ItemServiceProvider {
   constructor(public http: HttpClient) {
     console.log('Hello ItemServiceProvider Provider');
     this.items = [
-      {title: 'Item-A',price:"20 RS/piece",availableQuantity:"120 qty"},
-      {title: 'Item-B' ,price:"120 RS/piece",availableQuantity:"100 qty"},
-      {title: 'Item-AA' ,price:"200 RS/piece",availableQuantity:"50 qty"},
-      {title: 'Item-AB',price:"250 RS/piece",availableQuantity:"89 qty"},
-      {title: 'Item-AAA',price:"850 RS/piece",availableQuantity:"30 qty"},
-      {title: 'Item-ASs',price:"300 RS/piece",availableQuantity:"16 qty"}
+      {title: 'Item-A',price:"20RS/piece",availableQuantity:"120qty"},
+      {title: 'Item-B' ,price:"120RS/piece",availableQuantity:"100qty"},
+      {title: 'Item-AA' ,price:"200RS/piece",availableQuantity:"50qty"},
+      {title: 'Item-AB',price:"250RS/piece",availableQuantity:"89qty"},
+      {title: 'Item-AAA',price:"850RS/piece",availableQuantity:"30qty"},
+      {title: 'Item-ASs',price:"300RS/piece",availableQuantity:"16  qty"}
   ]
   }
 

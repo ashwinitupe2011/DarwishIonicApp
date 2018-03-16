@@ -91,4 +91,12 @@ page-invoice-details {
     .rtl table tr td:nth-child(2) {
         text-align: center;
     }
+
+    .login-button {
+        width: 100%;
+        // border-radius: 30px;
+        font-size: 0.9em;
+        // border: 1px solid #fff;
+        background-color: #3db7f0;
+      }
 }

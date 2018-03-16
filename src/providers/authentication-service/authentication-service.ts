@@ -18,4 +18,9 @@ export class AuthenticationServiceProvider {
   {
     return false;
   }
+
+  userLogin()
+  {
+  
+  }
 }
