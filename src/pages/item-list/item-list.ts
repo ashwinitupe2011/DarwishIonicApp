@@ -19,6 +19,8 @@ import { InvoiceDetailsPage } from '../invoice-details/invoice-details';
 })
 export class ItemListPage {
 
+  selectedItems  =[];
+  singleItem
 
   searchTerm: string = '';
   searchControl: FormControl;
@@ -47,6 +49,33 @@ export class ItemListPage {
 
   openInvoice()
   {
-    this.navCtrl.push(InvoiceDetailsPage);
+    console.log("Selected Items:"+this.selectedItems);
+    this.navCtrl.push(InvoiceDetailsPage,{itemList :this.selectedItems});
+  }
+
+  addItem(e:any,item1)
+  {
+    // console.log(e);
+    console.log(e.checked);
+
+    if(e.checked)
+    {
+      console.log(item1);
+      this.selectedItems.push(item1);
+    }
+    else
+    {
+      this.selectedItems.pop();
+      console.log("edhgfcyuj");
+
+      for(var i=0;i<this.selectedItems.length;i++)
+      {
+        if(this.selectedItems[i].title == item1.title)
+        {
+          this.selectedItems.slice(i,1);
+        }
+        
+      }
+    }
   }
 }

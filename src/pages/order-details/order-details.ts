@@ -14,31 +14,39 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'order-details.html',
 })
 export class OrderDetailsPage {
-  items: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	myDate: String = new Date().toISOString();
+  shownGroup = null;
+	constructor(public navCtrl: NavController, public navParams: NavParams) {
+		console.log("Date:"+this.myDate);
+	}
 
-    // this.orderDetails = '[{"":"14 Dec 2017","List":[{"LabNo":201790}]},{"ReportDate":"15 Feb 2018","List":[{"LabNo":20181}]}]'
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad OrderDetailsPage');
+	}
+
+	items = [
+	    'RNo:10090',
+	    'RNo:10091',
+	    'RNo:10092',
+	    'RNo:10093',
+	    'RNo:10094',
+	    'RNo:10095',
+	    'RNo:10096',
+	    'RNo:10097',
+	    'RNo:10098',
+	    'RNo:10099'
+	];
 
 
-    this.items = [
-      {ReportDate: 'RNo:10090',List:[{"LabNo":2010,"date" : '12 March 2016' }]},
-      {ReportDate: 'RNo:10091' ,List:[{"LabNo":2790,"date" : '21 April 2016'}]},
-      {ReportDate: 'RNo:10092' ,List:[{"LabNo":1790,"date" :'19 Jun 2016'}]},
-      {ReportDate: 'RNo:10093',List:[{"LabNo":5790,"date" : '11 July 2017'}]},
-      {ReportDate: 'RNo:10094',List:[{"LabNo":8906,"date" : '10 Nov 2017'}]},
-      {ReportDate: 'RNo:10095',List:[{"LabNo":9867,"date" : '9 Jan 2018'}]}
-  ]
-  }
-
-  sectionToggle(i)
-  {
-    console.log(i)
-    this.items[i].open = ! this.items[i].open;
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad OrderDetailsPage');
-  }
-
+    toggleGroup(group) {
+        if (this.isGroupShown(group)) {
+            this.shownGroup = null;
+        } else {
+            this.shownGroup = group;
+        }
+    };
+    isGroupShown(group) {
+        return this.shownGroup === group;
+    };
 }

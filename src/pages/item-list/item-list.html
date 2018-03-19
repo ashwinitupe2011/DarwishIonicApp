@@ -33,11 +33,10 @@
       </div>
 
   <div class="body" padding>
-      <div class="currencies">
-        <ion-row class="currency" *ngFor="let item of items">
-
+      <div class="Items">
+        <ion-row class="item" *ngFor="let item of items">
               <ion-col style="margin: 5px;" col-1>
-                  <ion-checkbox></ion-checkbox>
+                  <ion-checkbox (ionChange)="addItem($event,item)"></ion-checkbox>
                 </ion-col>
 
           <ion-col col-4 class="text">
@@ -49,8 +48,8 @@
 
           <ion-col col-4 class="text">
               <p class="name">{{item.title}}</p>
-            <p class="evolution" >{{item.price}}</p>
-              <p class="evolution">{{item.availableQuantity}}</p>
+            <p class="itemName" >{{item.price}}rs/piece</p>
+              <p class="itemName">{{item.availableQuantity}}</p>
             </ion-col>
         </ion-row>
       </div>

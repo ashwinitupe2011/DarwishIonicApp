@@ -47,8 +47,8 @@ page-item-list {
       }
     
       .body {
-        .currencies {
-          .currency {
+        .Items {
+          .item {
             background: linear-gradient(45deg, #5e6d8c, #384662);
             padding: 10px;
             border-radius: 10px;
@@ -77,18 +77,18 @@ page-item-list {
                 font-weight: 500;
               }
     
-              .usd{
-                color: #BCC6D4;
-                font-size: 15px;
-                font-weight: 700;
-              }
+              // .usd{
+              //   color: #BCC6D4;
+              //   font-size: 15px;
+              //   font-weight: 700;
+              // }
     
-              .evolution{
+              .itemName{
                 color:#00CB78;
     
-                .red{
-                  color: #F44447;
-                }
+                // .red{
+                //   color: #F44447;
+                // }
                 font-size: 16px;
                 font-weight: 500;
               }

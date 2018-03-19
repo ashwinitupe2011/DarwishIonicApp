@@ -1,23 +1,28 @@
 page-order-details {
 
-    .accordion-list {
-        background: white;
-        height: 100%;
-      }
-      .section {
-        background: white;
-        color: color($colors, primaryDark) ;
-        margin-bottom: 4px;
-      }
-      .section-active {
-        background:color($colors, primary); ;
-        color: white;
-        width: 100%;
-        text-align: left;
-        font-weight: bold;
-        font-size: 1.5rem;
-        margin-left: 10px;
-        margin-right: 10px;
-        height: 30%;
-      }
+  .order-list {
+    background-color: rgb(113, 184, 243);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    width:100%;
+}
+.item-md h3{
+  font-weight: bold;
+}
+ion-title{
+  text-align: center;
+}
+.card-content{
+  color: #444445;
+font-size: 13px;
+font-weight: bold;
+}
+.last-row-total{
+  border-bottom:none !important;
+}
+.lable-big{
+  color:#444445;
+  font-weight:bold;
+  text-align:left;
+}
 }
