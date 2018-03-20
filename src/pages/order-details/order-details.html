@@ -1,25 +1,32 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>Order Details</ion-title>
+    <ion-navbar color="primaryDark">
+        <ion-title> Order Details</ion-title>
     </ion-navbar>
-  </ion-header>
-  
-  <ion-content>
+</ion-header>
+
+ 
+  <ion-content >
     <ion-list>
         <ion-item *ngFor="let item of items; let i=index" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
           <button class="order-list">
-            <h3>{{ item }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-icon color="success" icon-only item-right [name]="isGroupShown(i) ? 'arrow-down' : 'arrow-forward'"></ion-icon></h3>
+            <h3>{{ item.requestId }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <ion-icon color="success" icon-only item-right [name]="isGroupShown(i) ? 'arrow-down' : 'arrow-forward'"></ion-icon> </h3><h2>{{ item.requestedDate |date: 'dd MMMM yyyy'}}</h2>
+           
           </button>
           <div *ngIf="isGroupShown(i)">
-              <ion-card *ngFor="let item of items; let i=index" text-wrap  >
+              <ion-card *ngFor="let item of item.itemList; let i=index" text-wrap  >
                   <ion-row class="profile">
                       <ion-grid class="data-cart">
                           <ion-row class="record-details">
-                              <ion-col col-12 class="card-content">TOTAL PRICE  :  2010 RS</ion-col>
+                              <ion-col col-12 class="card-content">ITEM Name  :  {{ item.itemName  }}</ion-col>
                           </ion-row>
                           <ion-row class="record-details">
-                              <ion-col col-12 class="card-content">ORDERED DATE  :  12 MARCH 2016</ion-col>
+                              <ion-col col-12 class="card-content"> Quote Quantity  :   {{ item.quoteQuantity  }}</ion-col>
                           </ion-row>
+
+                          <ion-row class="record-details">
+                            <ion-col col-12 class="card-content"> Quote Price : {{item.quotePrice}} </ion-col>
+                        </ion-row>
+
                       </ion-grid>
                   </ion-row>
               </ion-card>
@@ -30,7 +37,7 @@
                               <ion-grid class="data-cart" item-content>
                                 <ion-row class="order-details last-row-total">
                                     <ion-col col-6 class="lable-big">TOTAL PRICE :</ion-col>
-                                    <ion-col col-6>{{totalPrice | currency:'INR':'&#8377;'}}</ion-col>
+                                    <ion-col col-6>{{item.total | currency:'INR':'&#83977;'}}</ion-col>
                                 </ion-row>
                             </ion-grid>
                         </ion-col>
@@ -40,4 +47,5 @@
       </ion-item>
     </ion-list>
   </ion-content>
+  
   

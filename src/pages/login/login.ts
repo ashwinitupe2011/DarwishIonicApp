@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
-import 'rxjs/Rx';
-import { Http ,Headers,RequestOptions} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthenticationServiceProvider } from '../../providers/authentication-service/authentication-service';
-import { HttpClientModule, HttpClient,HttpHeaders } from '@angular/common/http';
+import { TabsPage } from '../tabs/tabs';
+
+
 
 /**
  * Generated class for the LoginPage page.
@@ -16,48 +16,54 @@ import { HttpClientModule, HttpClient,HttpHeaders } from '@angular/common/http';
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
+  templateUrl: 'login.html'
 })
 export class LoginPage {
 
   public backgroundImage = 'assets/imgs/background-1.jpg';
+  password: string;
+  username:string;
 
-  constructor(public navCtrl: NavController,public http : Http, public navParams: NavParams,public authService : AuthenticationServiceProvider) {
+  loginResponse : any;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,public authService:AuthenticationServiceProvider) {
 
-  //   this.authService.userLogin.then(data => {
-  //     console.log(data);
-  // });
+  }
 
-  // this.authService.userLogin();
-
-  let datajson = JSON.stringify(
-    {userName:'nitin@gmail.com',
-    password:'nitin',
-   });
-
-  // this.http.post("http://192.168.0.103:8200/loginserver/login/user",datajson).subscribe(data => {alert("sagdhjgsdx")});
-
-  let config ={ headers: new HttpHeaders().set('Content-Type', 'application/json') };
-
-  var headers = new Headers();
-  headers.append('Access-Control-Allow-Origin' , '*');
-  headers.append('Access-Control-Allow-Methods', 'POST');
-  headers.append('Accept','application/json');
-  headers.append('content-type','application/json');
-  let options = new RequestOptions({ headers:headers,withCredentials: true,body:datajson,method:'POST'});
-  this.http.post('http://192.168.0.103:8200/loginserver/login/user',
-    datajson,
-    options)
-    .map(res  => res.json())
-    .subscribe((res) => console.log("res", res));
-}
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login():void{
-    this.navCtrl.push(TabsPage);
-  }
+  login()
+  {
+    this.authService.userLoginRequest(this.username,this.password).then(data => {
+      this.saveLoginData(data);
+      console.log("data "+data);
+      });
 
+      this.callPageValidation();
+    }
+
+    saveLoginData(data)
+    {
+      this.loginResponse = data;
+
+      window.localStorage.setItem('userID',this.loginResponse.responseData.response.userId);
+      window.localStorage.setItem('emailID',this.loginResponse.responseData.response.emailId);
+
+      console.log("userId "+ window.localStorage.getItem('userID'));
+      console.log("emailID "+ window.localStorage.getItem('emailID'));
+    }
+
+    callPageValidation()
+    {
+      console.log("status " +this.loginResponse.status);
+      if(this.loginResponse.status == 200)
+      {
+       this.navCtrl.push(TabsPage);
+      }
+      else{
+          alert("this.loginResponse.responseData.message");
+      }
+    }
 }

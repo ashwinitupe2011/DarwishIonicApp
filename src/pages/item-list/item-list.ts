@@ -30,19 +30,30 @@ export class ItemListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public itemService : ItemServiceProvider) {
     this.searchControl = new FormControl();
+    this.callListResponse();
+    this.setFilteredItems();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ItemListPage');
-
-    this.setFilteredItems();
- 
         this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
             this.setFilteredItems();
         });
  
   }
 
+  callListResponse()
+  {
+    this.itemService.getItemList().then(data => {
+      this.saveItemList(data);
+      });
+  }
+
+  saveItemList(data)
+  {
+    this.items = data.responseData.response;
+    console.log(this.items);
+  }
   setFilteredItems() {
     this.items = this.itemService.filterItems(this.searchTerm);
   }
@@ -55,7 +66,6 @@ export class ItemListPage {
 
   addItem(e:any,item1)
   {
-    // console.log(e);
     console.log(e.checked);
 
     if(e.checked)

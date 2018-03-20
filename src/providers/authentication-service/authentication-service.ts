@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 
 /*
@@ -10,17 +11,42 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthenticationServiceProvider {
 
-  constructor(public http: HttpClient) {
+  loginData : any;
+
+  constructor(public http: Http) {
     console.log('Hello AuthenticationServiceProvider Provider');
+    this.loginData = null;
   }
 
   isLogedIn()
   {
+
+   var userID = window.localStorage.getItem('userID');
+   var emailID =  window.localStorage.getItem('emailID');
+
+   console.log(userID + " " + emailID);
+
+   if(userID)
+    return true;
+   else 
     return false;
   }
 
-  userLogin()
+  userLoginRequest(userId,password)
   {
-  
+    if (this.loginData) {
+      return Promise.resolve(this.loginData);
+    }
+ 
+    var userDataParam = {userId:userId,password:password};
+    
+    return new Promise(resolve => {
+      this.http.post('http://192.168.0.105:56446/login/user',userDataParam)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.loginData = data;
+          resolve(this.loginData);
+        });
+    });
   }
 }

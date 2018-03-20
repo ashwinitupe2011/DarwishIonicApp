@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ItemServiceProvider } from '../../providers/item-service/item-service';
 
 /**
  * Generated class for the OrderDetailsPage page.
@@ -15,29 +16,29 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class OrderDetailsPage {
 
+	items : any[];
+
 	myDate: String = new Date().toISOString();
   shownGroup = null;
-	constructor(public navCtrl: NavController, public navParams: NavParams) {
-		console.log("Date:"+this.myDate);
+	constructor(public navCtrl: NavController, public navParams: NavParams,public itemService : ItemServiceProvider) {
+		this.getOrderDetails();
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad OrderDetailsPage');
 	}
 
-	items = [
-	    'RNo:10090',
-	    'RNo:10091',
-	    'RNo:10092',
-	    'RNo:10093',
-	    'RNo:10094',
-	    'RNo:10095',
-	    'RNo:10096',
-	    'RNo:10097',
-	    'RNo:10098',
-	    'RNo:10099'
-	];
+	getOrderDetails()
+	{
+		this.itemService.getQuoteDetails().then(data => {
+			this.saveQuoteList(data);
+			});
+	}
 
+	saveQuoteList(data)
+	{
+		this.items = data.responseData.response;
+	}
 
     toggleGroup(group) {
         if (this.isGroupShown(group)) {
