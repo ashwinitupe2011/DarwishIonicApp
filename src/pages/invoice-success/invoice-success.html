@@ -8,8 +8,8 @@
 
 <ion-header>
 
-    <ion-navbar color="primaryDark">
-      <ion-title>Invoice Success</ion-title>
+    <ion-navbar hideBackButton="true" color="primaryDark">
+      <ion-title hideBackButton="true">Invoice Success</ion-title>
     </ion-navbar>
   
   </ion-header>
@@ -21,5 +21,9 @@
           <h1 style="text-align: center;" ng-if=response>{{response.requestId}}</h1>
       </div>
     </div>
+  </div>
+
+  <div text-center>
+      <button ion-button (click)="goBacktoRoot()">OK</button>
   </div>
 </ion-content>

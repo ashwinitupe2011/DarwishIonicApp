@@ -1,4 +1,4 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Item Details" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Order Details" tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="tab1Root" (ionChange)="tabSelected($event)" tabTitle="Item Details" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" (ionChange)="tabSelected($event)" tabTitle="Order Details" tabIcon="information-circle"></ion-tab>
 </ion-tabs>

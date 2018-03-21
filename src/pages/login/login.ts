@@ -20,7 +20,9 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class LoginPage {
 
-  public backgroundImage = 'assets/imgs/background-1.jpg';
+  // public backgroundImage = 'assets/imgs/background-1.jpg';
+  public backgroundImage = 'assets/imgs/back1.jpg';
+  
   password: string;
   username:string;
 
@@ -57,13 +59,16 @@ export class LoginPage {
 
     callPageValidation()
     {
-      console.log("status " +this.loginResponse.status);
       if(this.loginResponse.status == 200)
       {
-       this.navCtrl.push(TabsPage);
-      }
-      else{
+       this.navCtrl.setRoot(TabsPage);
+      } 
+      else if(this.loginResponse.status == 400){
           alert("this.loginResponse.responseData.message");
+      }
+      else
+      {
+        alert("this.loginResponse.responseData.message");
       }
     }
 }

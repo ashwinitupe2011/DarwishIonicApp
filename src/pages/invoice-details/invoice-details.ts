@@ -101,7 +101,7 @@ export class InvoiceDetailsPage {
   confirmOrderDetails() {
     const alertConfirm = this.alertCtrl.create({
       title: 'Continue....',
-      message: 'R u sure you want to place this order ?',
+      message: 'R u sure you want to place this order',
       buttons: [
         {
           text: 'Disagree',
@@ -140,8 +140,7 @@ export class InvoiceDetailsPage {
 
     if(data.status)
     {
-      this.navCtrl.pop();
-      this.navCtrl.push(InvoiceSuccessPage,{itemInfo:data.responseData.response});
+    this.navCtrl.push(InvoiceSuccessPage,{itemInfo:data.responseData.response});
     }
     else
     {

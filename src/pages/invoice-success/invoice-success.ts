@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the InvoiceSuccessPage page.
@@ -26,4 +27,8 @@ export class InvoiceSuccessPage {
     console.log('ionViewDidLoad InvoiceSuccessPage');
   }
 
+  goBacktoRoot()
+  {
+    this.navCtrl.setRoot(TabsPage);
+  }
 }

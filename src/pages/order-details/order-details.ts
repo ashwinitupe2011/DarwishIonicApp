@@ -19,13 +19,14 @@ export class OrderDetailsPage {
 	items : any[];
 
 	myDate: String = new Date().toISOString();
-  shownGroup = null;
+ 	 shownGroup = null;
 	constructor(public navCtrl: NavController, public navParams: NavParams,public itemService : ItemServiceProvider) {
-		this.getOrderDetails();
+		
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad OrderDetailsPage');
+		this.getOrderDetails();
 	}
 
 	getOrderDetails()
@@ -36,7 +37,7 @@ export class OrderDetailsPage {
 	}
 	ngOnInit()
 	{
-		alert("ngOnInit");
+		 
 	}
 	saveQuoteList(data)
 	{

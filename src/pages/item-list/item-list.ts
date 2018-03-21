@@ -29,33 +29,25 @@ export class ItemListPage {
   orderDetails : any = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public itemService : ItemServiceProvider) {
+    
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ItemListPage');
+    this.items ="";
     this.searchControl = new FormControl();
     this.callListResponse();
     this.setFilteredItems();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
       this.setFilteredItems();
   });
-  //   
   }
-
-  // ngOnInit()
-	// {
-  //   this.callListResponse();
-  //   this.setFilteredItems();
-  //   this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-  //     this.setFilteredItems();
-  // });
-  // }
   
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ItemListPage');
-  }
-
-
-
   callListResponse()
   {
+    this.items ="";
     this.itemService.getItemList().then(data => {
+      console.log("RefreshData:"+JSON.stringify(data));
       this.saveItemList(data);
       });
   }
@@ -63,7 +55,7 @@ export class ItemListPage {
   saveItemList(data)
   {
     this.items = data.responseData.response;
-    console.log(this.items);
+    console.log("ItemList");
   }
   setFilteredItems() {
     this.items = this.itemService.filterItems(this.searchTerm);
@@ -71,32 +63,25 @@ export class ItemListPage {
 
   openInvoice()
   {
-    console.log("Selected Items:"+this.selectedItems);
-    this.navCtrl.pop();
     this.navCtrl.push(InvoiceDetailsPage,{itemList :this.selectedItems});
   }
 
   addItem(e:any,item1)
   {
-    console.log(e.checked);
-
     if(e.checked)
     {
-      console.log(item1);
       this.selectedItems.push(item1);
     }
     else
     {
       this.selectedItems.pop();
-      console.log("edhgfcyuj");
 
       for(var i=0;i<this.selectedItems.length;i++)
       {
         if(this.selectedItems[i].title == item1.title)
         {
           this.selectedItems.slice(i,1);
-        }
-        
+        } 
       }
     }
   }

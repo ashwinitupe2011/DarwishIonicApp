@@ -15,8 +15,8 @@
 
 
 <ion-header>
-    <ion-navbar color="primaryDark">
-        <ion-title>Item List</ion-title>
+    <ion-navbar hideBackButton="true" color="primaryDark">
+        <ion-title hideBackButton="true">Item List</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -40,7 +40,7 @@
                 </ion-col>
 
           <ion-col col-4 class="text">
-            <p class="rank">Item Code </p>
+            <p class="rank">Item Name </p>
             <p class="rank">Item Price</p>
             <p class="rank">Item Quantity</p>
           </ion-col>
@@ -48,7 +48,7 @@
 
           <ion-col col-4 class="text">
               <p class="name">{{item.itemName}}</p>
-            <p class="itemName" >{{item.unitPrice | currency:'INR':'&#83977;'}}/piece</p>
+            <p class="itemName" >{{item.unitPrice | currency:'INR':'&#83977;'}}/unit</p>
               <p class="itemName">{{item.quantityAvailable}}</p>
             </ion-col>
         </ion-row>

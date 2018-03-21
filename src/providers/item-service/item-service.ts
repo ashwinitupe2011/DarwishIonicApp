@@ -33,16 +33,19 @@ export class ItemServiceProvider {
   getItemList()
   {
     if (this.itemListResponse) {
-      return Promise.resolve(this.itemListResponse);
+      console.log("this.itemListResponse"+JSON.stringify(this.itemListResponse));
+      return Promise.resolve(JSON.stringify(this.itemListResponse));
     }
  
     var itemListParam = {};
     
     return new Promise(resolve => {
-      this.http.post('http://192.168.2.148:56446/item/list',itemListParam)
+      this.http.post('http://alice.softdotcom.in:2222/item/list',itemListParam)
         .map(res => res.json())
         .subscribe(data => {
+          this.itemListResponse = [];
           this.itemListResponse = data;
+          console.log("this.itemListResponse"+JSON.stringify(data));
           this.items = data.responseData.response;
           resolve(this.itemListResponse);
         });
@@ -59,7 +62,7 @@ export class ItemServiceProvider {
     var quoteDetailsParam = {userId:"S01294"};
     
     return new Promise(resolve => {
-      this.http.post('http://192.168.2.148:56446/item/user/list',quoteDetailsParam)
+      this.http.post('http://alice.softdotcom.in:2222/item/user/list',quoteDetailsParam)
         .map(res => res.json())
         .subscribe(data => {
           this.quoteDetailList = data;
@@ -75,7 +78,7 @@ export class ItemServiceProvider {
     console.log("item Param "+ JSON.stringify(itemList));
     
     return new Promise(resolve => {
-      this.http.post('http://192.168.2.148:56446/item/insert',itemList)
+      this.http.post('http://alice.softdotcom.in:2222/item/insert',itemList)
         .map(res => res.json())
         .subscribe(data => {
           this.insertItemResponse = data;
