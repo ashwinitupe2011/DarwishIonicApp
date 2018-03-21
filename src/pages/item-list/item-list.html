@@ -48,7 +48,7 @@
 
           <ion-col col-4 class="text">
               <p class="name">{{item.itemName}}</p>
-            <p class="itemName" >{{item.unitPrice}}rs/piece</p>
+            <p class="itemName" >{{item.unitPrice | currency:'INR':'&#83977;'}}/piece</p>
               <p class="itemName">{{item.quantityAvailable}}</p>
             </ion-col>
         </ion-row>

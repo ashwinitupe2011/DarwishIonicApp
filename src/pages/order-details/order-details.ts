@@ -34,7 +34,10 @@ export class OrderDetailsPage {
 			this.saveQuoteList(data);
 			});
 	}
-
+	ngOnInit()
+	{
+		alert("ngOnInit");
+	}
 	saveQuoteList(data)
 	{
 		this.items = data.responseData.response;

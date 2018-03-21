@@ -15,7 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class InvoiceSuccessPage {
 
+  response;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.response = this.navParams.get('itemInfo');
+    console.log("LLL "+JSON.stringify(this.response));
   }
 
   ionViewDidLoad() {

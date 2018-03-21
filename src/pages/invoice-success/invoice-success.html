@@ -14,5 +14,12 @@
   
   </ion-header>
 <ion-content padding>
-
+  <div class="row">
+    <div class="col">
+      <div style="vertical-align: middle;">
+        <h1 style="text-align: center; " ng-if=response >Your Request Number Is :</h1>
+          <h1 style="text-align: center;" ng-if=response>{{response.requestId}}</h1>
+      </div>
+    </div>
+  </div>
 </ion-content>

@@ -32,15 +32,26 @@ export class ItemListPage {
     this.searchControl = new FormControl();
     this.callListResponse();
     this.setFilteredItems();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.setFilteredItems();
+  });
+  //   
   }
 
+  // ngOnInit()
+	// {
+  //   this.callListResponse();
+  //   this.setFilteredItems();
+  //   this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+  //     this.setFilteredItems();
+  // });
+  // }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ItemListPage');
-        this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-            this.setFilteredItems();
-        });
- 
   }
+
+
 
   callListResponse()
   {

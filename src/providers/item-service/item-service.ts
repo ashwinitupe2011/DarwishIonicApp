@@ -16,15 +16,12 @@ export class ItemServiceProvider {
 
   quoteDetailList : any[];
 
+  insertItemResponse : any[];
+
   constructor(public http: Http) {
     console.log('Hello ItemServiceProvider Provider');
   }
 
-
-  getOrderDetails()
-  {
-      
-  }
 
   filterItems(searchTerm){
     return this.items.filter((item) => {
@@ -42,7 +39,7 @@ export class ItemServiceProvider {
     var itemListParam = {};
     
     return new Promise(resolve => {
-      this.http.post('http://192.168.0.105:56446/item/list',itemListParam)
+      this.http.post('http://192.168.2.148:56446/item/list',itemListParam)
         .map(res => res.json())
         .subscribe(data => {
           this.itemListResponse = data;
@@ -62,11 +59,27 @@ export class ItemServiceProvider {
     var quoteDetailsParam = {userId:"S01294"};
     
     return new Promise(resolve => {
-      this.http.post('http://192.168.0.105:56446/item/user/list',quoteDetailsParam)
+      this.http.post('http://192.168.2.148:56446/item/user/list',quoteDetailsParam)
         .map(res => res.json())
         .subscribe(data => {
           this.quoteDetailList = data;
           resolve(this.quoteDetailList);
+        });
+    });
+  }
+  insertItems(itemList)
+  {
+    if (this.insertItemResponse) {
+      return Promise.resolve(this.insertItemResponse);
+    }
+    console.log("item Param "+ JSON.stringify(itemList));
+    
+    return new Promise(resolve => {
+      this.http.post('http://192.168.2.148:56446/item/insert',itemList)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.insertItemResponse = data;
+          resolve(this.insertItemResponse);
         });
     });
   }

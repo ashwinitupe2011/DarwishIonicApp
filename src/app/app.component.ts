@@ -15,15 +15,17 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen , authService : AuthenticationServiceProvider ) {
     platform.ready().then(() => {
+      
+      this.rootPage = LoginPage;
 
-      if(authService.isLogedIn)
-      {
-        this.rootPage = LoginPage;
-      }
-      else
-      {
-        this.rootPage = TabsPage;
-      }
+      // if(authService.isLogedIn)
+      // {
+      //   this.rootPage = LoginPage;
+      // }
+      // else
+      // {
+      //   this.rootPage = TabsPage;
+      // }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
