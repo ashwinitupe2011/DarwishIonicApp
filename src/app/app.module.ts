@@ -18,6 +18,8 @@ import { ItemServiceProvider } from '../providers/item-service/item-service';
 import { InvoiceDetailsPage } from '../pages/invoice-details/invoice-details';
 import { InvoiceSuccessPage } from '../pages/invoice-success/invoice-success';
 
+import { Geolocation } from '@ionic-native/geolocation';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -47,6 +49,7 @@ import { InvoiceSuccessPage } from '../pages/invoice-success/invoice-success';
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthenticationServiceProvider,
     ItemServiceProvider

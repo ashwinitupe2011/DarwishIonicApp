@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams ,AlertController} from 'ionic-angul
 import { InvoiceSuccessPage } from '../invoice-success/invoice-success';
 import { ItemServiceProvider } from '../../providers/item-service/item-service';
 
+import { Geolocation } from '@ionic-native/geolocation';
+import { TabsPage } from '../tabs/tabs';
+
 /**
  * Generated class for the InvoiceDetailsPage page.
  *
@@ -20,48 +23,92 @@ export class InvoiceDetailsPage {
   public Form = { 
     vf:{ }
     };
-
     jsonArray = [];
-
-     insertJson ;
+    insertJson ;
+    totalprice =0;
+    lat;
+    longitude;
 
   items;
   totalPrice:number;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public itemService:ItemServiceProvider) {
+  constructor(public navCtrl: NavController,public geolocation: Geolocation,public navParams: NavParams,public alertCtrl: AlertController,public itemService:ItemServiceProvider) {
     this.initializeItems();
     this.totalPrice = 1500;
     
     console.log("ItemList selected :"+navParams.get("itemList"));
+    this.callLoacationAPI();
+  }
 
+  calculateTotalPrice(data)
+  {
+   let price = [];
+  
+    for(var i =0;i<data.length;i++)
+    {
+      price[i] =  this.Form.vf[i]* data[i].unitPrice;
+    }
+
+    for(var i=0;i<price.length;i++)
+    {
+      this.totalprice = price[i] + this.totalprice;
+    }
+     console.log("price "+this.totalprice);
+  }
+  ngOnInit()
+  {
+  
     
+  }
+  callLoacationAPI()
+  {
+        this.geolocation.getCurrentPosition().then((resp) => {
+     console.log("Location "+JSON.stringify(resp));
+     this.lat = resp.coords.latitude;
+     this.longitude = resp.coords.longitude;
+      // resp.coords.latitude
+      // resp.coords.longitude
+  }).catch((error) => {
+      console.log('Error getting location', error);
+     console.log('Error getting location');
+  });
+
+  let watch = this.geolocation.watchPosition();
+  watch.subscribe((data) => {
+      console.log("Location "+JSON.stringify(data));
+      // data can be a set of coordinates, or an error (if an error occurred).
+      // data.coords.latitude
+      // data.coords.longitude
+  });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InvoiceDetailsPage');
-
+   
   }
 
-  onSuccess()
-  {
-    alert("Order Place Succesfuly");
-  }
+  // onSuccess()
+  // {
+  //   alert("Order Place Succesfuly");
+  // }
+
   initializeItems() {
     this.items = this.navParams.get("itemList");
     console.log(this.items);
 		console.log(this.items);
-	}
+  }
+  
   confirmOrderDetails() {
     const alertConfirm = this.alertCtrl.create({
-      title: 'Contunie....',
-      message: 'Do you agree to place this order. Once order is get place it cannot be undone.',
+      title: 'Continue....',
+      message: 'R u sure you want to place this order ?',
       buttons: [
         {
           text: 'Disagree',
           handler: () => {
             console.log('Disagree clicked');
             console.log(this.Form);
-            
+            this.calculateTotalPrice(this.navParams.get("itemList"));
           }
         },
         {
@@ -72,7 +119,6 @@ export class InvoiceDetailsPage {
             this.generateInsetItemJson(this.navParams.get("itemList"));
 
             this.insertItems(this.insertJson);
-            
           }
         }
       ]
@@ -94,17 +140,17 @@ export class InvoiceDetailsPage {
 
     if(data.status)
     {
-    this.navCtrl.push(InvoiceSuccessPage,{itemInfo:data.responseData.response});
+      this.navCtrl.pop();
+      this.navCtrl.push(InvoiceSuccessPage,{itemInfo:data.responseData.response});
     }
     else
     {
-      alert("kkkk");
+      alert("Incorrect Request. Fill all details");
     }
   }
 
   generateInsetItemJson(data)
   {
-
     this.insertJson = "";
     console.log(JSON.stringify(data));
 
@@ -121,9 +167,10 @@ export class InvoiceDetailsPage {
     }
 
     console.log(JSON.stringify(this.jsonArray));
-
+    
     this.insertJson ={
-        "location" : "23.7,12.4", 
+        "locLat" : this.lat,
+        "locLong":this.longitude, 
         "userId" : "S01294", 
         "status" : "requested",
         "itemList" : this.jsonArray

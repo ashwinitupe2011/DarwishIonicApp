@@ -72,6 +72,7 @@ export class ItemListPage {
   openInvoice()
   {
     console.log("Selected Items:"+this.selectedItems);
+    this.navCtrl.pop();
     this.navCtrl.push(InvoiceDetailsPage,{itemList :this.selectedItems});
   }
 
