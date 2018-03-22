@@ -41,7 +41,7 @@ export class AuthenticationServiceProvider {
     var userDataParam = {userId:userId,password:password};
     
     return new Promise(resolve => {
-      this.http.post('http://192.168.0.103:5646/login/user',userDataParam)
+      this.http.post('http://alice.softdotcom.in:2222/login/user',userDataParam)
         .map(res => res.json())
         .subscribe(data => {
           this.loginData = data;

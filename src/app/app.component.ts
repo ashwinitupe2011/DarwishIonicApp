@@ -12,7 +12,7 @@ import { LoginPage } from '../pages/login/login';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any ;
    loading1 ;
 
   @ViewChild(Nav) nav: Nav;

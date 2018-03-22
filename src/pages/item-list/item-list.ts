@@ -61,7 +61,7 @@ export class ItemListPage {
     if(this.selectedItems.length <= 0)
     {
      let message={
-      title: 'Error',
+      title: 'Alert !',
       msg:'Please select at least one item'
      } 
       this.events.publish('alert:presented',message );

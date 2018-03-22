@@ -6,15 +6,15 @@
 -->
 <ion-header>
 	<ion-navbar hideBackButton="true" color="primaryDark">
-		<ion-title hideBackButton="true">Invoice Success</ion-title>
+		<ion-title hideBackButton="true">Quote Request</ion-title>
 	</ion-navbar>
 </ion-header>
 <ion-content padding>
 	<div class="row">
 		<div class="col">
 			<div style="vertical-align: middle;">
-				<h1 style="text-align: center; " ng-if=response >Your Request Number Is :</h1>
-				<h1 style="text-align: center;" ng-if=response>{{response.requestId}}</h1>
+					<h1 style="text-align: center; font-size: 16px;font-weight: 500;" ng-if=response >Great !! Your quote is successfully submitted</h1>
+				<h1 style="text-align: center;font-size: 16px;font-weight: 700;" ng-if=response>Request No. : {{response.requestId}}</h1>
 			</div>
 		</div>
 	</div>

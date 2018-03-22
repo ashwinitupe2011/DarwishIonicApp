@@ -37,6 +37,7 @@ export class LoginPage {
 
   login()
   {
+    this.events.publish('loader:dismiss');
     if(this.username && this.password)
     {
       this.authService.userLoginRequest(this.username,this.password).then(data => {
@@ -46,15 +47,13 @@ export class LoginPage {
       });
     }
     else{
-      this.events.publish('loader:dismiss');
       let message={
-        title: 'Error',
+        title: 'Alert !',
         msg:'Please enter correct details'
        } 
        this.events.publish('alert:presented',message );
     }
   }
-
     saveLoginData(data)
     {
       this.loginResponse = data;
@@ -69,6 +68,7 @@ export class LoginPage {
 
     callPageValidation()
     {
+      this.events.publish('loader:dismiss');
         if(this.loginResponse.status == 200)
         {
           this.events.publish('loader:dismiss');
@@ -76,9 +76,8 @@ export class LoginPage {
         }
         else
         {
-        this.events.publish('loader:dismiss');
         let message={
-          title: 'Error',
+          title: 'Alert !',
           msg:this.loginResponse.responseData.message
          } 
           this.events.publish('alert:presented',message );

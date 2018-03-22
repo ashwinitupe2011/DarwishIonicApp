@@ -13,8 +13,7 @@
 		</ion-buttons>
 		<ion-title>Item Details</ion-title>
 	</ion-navbar>
-</ion-header>
-<ion-content class="page-background transparent-header" >
+
 	<ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
 	<div class="welcome-header">
 		<div class="content">
@@ -25,6 +24,9 @@
 			<ion-icon name="md-add" ></ion-icon>
 		</button>
 	</div>
+</ion-header>
+
+<ion-content class="page-background transparent-header" >
 	<div class="body" padding>
 		<div class="Items">
 			<ion-row class="item" *ngFor="let item of items">
@@ -34,7 +36,7 @@
 				<ion-col col-4 class="text">
 					<p class="rank">Item Name </p>
 					<p class="rank">Item Price</p>
-					<p class="rank">Item Quantity</p>
+					<p class="rank">Avl. Quantity</p>
 				</ion-col>
 				<ion-col class="text">
 					<p class="name">{{item.itemName}}</p>

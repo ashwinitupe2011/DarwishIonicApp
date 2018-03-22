@@ -55,11 +55,6 @@ export class InvoiceDetailsPage {
     }
      console.log("price "+this.totalprice);
   }
-  ngOnInit()
-  {
-  
-    
-  }
   callLoacationAPI()
   {
      this.geolocation.getCurrentPosition().then((resp) => {
@@ -95,11 +90,11 @@ export class InvoiceDetailsPage {
   
   confirmOrderDetails() {
     const alertConfirm = this.alertCtrl.create({
-      title: 'Continue....',
+      title: 'Confirme',
       message: 'Are you sure you want to continue...',
       buttons: [
         {
-          text: 'Disagree',
+          text: 'NO',
           handler: () => {
             console.log('Disagree clicked');
             console.log(this.Form);
@@ -107,13 +102,13 @@ export class InvoiceDetailsPage {
           }
         },
         {
-          text: 'Agree',
+          text: 'YES',
           handler: () => {
             console.log('Agree clicked');
             this.events.publish('loader:presented');
             this.generateInsetItemJson(this.navParams.get("itemList"));
 
-            this.insertItems(this.insertJson);
+            
           }
         }
       ]
@@ -140,7 +135,7 @@ export class InvoiceDetailsPage {
     else
     {
       let message={
-        title: 'Error',
+        title: 'Alert !',
         msg:'Incorrect Request. Fill all details'
        } 
         this.events.publish('alert:presented',message );
@@ -149,9 +144,7 @@ export class InvoiceDetailsPage {
 
   generateInsetItemJson(data)
   {
-    if(this.lat && this.longitude)
-    {
-      this.insertJson = "";
+    this.insertJson = "";
     console.log(JSON.stringify(data));
 
     for(var i =0;i<data.length;i++)
@@ -169,21 +162,14 @@ export class InvoiceDetailsPage {
     console.log(JSON.stringify(this.jsonArray));
     
     this.insertJson ={
-        "locLat" : this.lat,
-        "locLong":this.longitude, 
+        "locLat" : 23.9373,
+        "locLong":45.899, 
         "userId" : window.localStorage.getItem('userID'), 
         "status" : "requested",
         "itemList" : this.jsonArray
       };
       console.log(JSON.stringify(this.insertJson));
+
+      this.insertItems(this.insertJson);
     }
-    else
-    {
-      let message={
-        title: 'Error',
-        msg:'Please check your location setiing. Enable your GPS.'
-       } 
-        this.events.publish('alert:presented',message );
-    }
-  }
 }
