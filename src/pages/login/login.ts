@@ -40,12 +40,13 @@ export class LoginPage {
     if(this.username && this.password)
     {
       this.authService.userLoginRequest(this.username,this.password).then(data => {
+      this.events.publish('loader:presented');
       this.saveLoginData(data);
       console.log("data "+data);
       });
-    
     }
     else{
+      this.events.publish('loader:dismiss');
       let message={
         title: 'Error',
         msg:'Please enter correct details'
@@ -70,10 +71,12 @@ export class LoginPage {
     {
         if(this.loginResponse.status == 200)
         {
+          this.events.publish('loader:dismiss');
         this.navCtrl.setRoot(TabsPage);
         }
         else
         {
+        this.events.publish('loader:dismiss');
         let message={
           title: 'Error',
           msg:this.loginResponse.responseData.message

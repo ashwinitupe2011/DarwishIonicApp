@@ -32,11 +32,6 @@ export class ItemServiceProvider {
 
   getItemList()
   {
-    // if (this.itemListResponse) {
-    //   console.log("this.itemListResponse"+JSON.stringify(this.itemListResponse));
-    //   return Promise.resolve(JSON.stringify(this.itemListResponse));
-    // }
- 
     var itemListParam = {};
     
     return new Promise(resolve => {
@@ -48,18 +43,18 @@ export class ItemServiceProvider {
           console.log("this.itemListResponse"+JSON.stringify(data));
           this.items = data.responseData.response;
           resolve(this.itemListResponse);
+        },
+        error => 
+        {
+          console.log("Error"+JSON.stringify(error.json()));
+          resolve(error.json())
         });
     });
   }
 
 
   getQuoteDetails(userId)
-  {
-    
-    // if (this.quoteDetailList) {
-    //   return Promise.resolve(this.quoteDetailList);
-    // }
- 
+  { 
     var quoteDetailsParam = {userId:window.localStorage.getItem('userID')};
     
     return new Promise(resolve => {
@@ -68,14 +63,16 @@ export class ItemServiceProvider {
         .subscribe(data => {
           this.quoteDetailList = data;
           resolve(this.quoteDetailList);
+        },
+        error => 
+        {
+          console.log("Error"+JSON.stringify(error.json()));
+          resolve(error.json())
         });
     });
   }
   insertItems(itemList)
   {
-    // if (this.insertItemResponse) {
-    //   return Promise.resolve(this.insertItemResponse);
-    // }
     console.log("item Param "+ JSON.stringify(itemList));
     
     return new Promise(resolve => {
@@ -84,6 +81,11 @@ export class ItemServiceProvider {
         .subscribe(data => {
           this.insertItemResponse = data;
           resolve(this.insertItemResponse);
+        },
+        error => 
+        {
+          console.log("Error"+JSON.stringify(error.json()));
+          resolve(error.json())
         });
     });
   }

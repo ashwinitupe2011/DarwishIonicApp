@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { Platform, AlertController,Nav} from 'ionic-angular';
+import { Platform, AlertController,Nav, LoadingController} from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -13,11 +13,15 @@ import { LoginPage } from '../pages/login/login';
 })
 export class MyApp {
   rootPage:any = TabsPage;
+   loading1 ;
 
   @ViewChild(Nav) nav: Nav;
 
-  constructor(platform: Platform,public app:App,events:Events,public alertCtrl:AlertController, statusBar: StatusBar, splashScreen: SplashScreen , authService : AuthenticationServiceProvider ) {
+  constructor(platform: Platform,public app:App,events:Events,public loading:LoadingController,public alertCtrl:AlertController, statusBar: StatusBar, splashScreen: SplashScreen , authService : AuthenticationServiceProvider ) {
     platform.ready().then(() => {
+      this.loading1 =  this.loading.create({
+        content: 'Please wait...'
+      });
       
       // this.rootPage = LoginPage;
 
@@ -25,6 +29,14 @@ export class MyApp {
         console.log(JSON.stringify(alertData));
         this.showAlert(alertData.title,alertData.msg);
       });  
+
+      events.subscribe('loader:presented', (alertData) => {
+        this.showLoader();
+      }); 
+      
+      events.subscribe('loader:dismiss', (alertData) => {
+        this.dismissLoader();
+      }); 
 
       if(authService.isLogedIn())
       {
@@ -57,14 +69,26 @@ export class MyApp {
   goToItemList(){
     this.app.getRootNav().getActiveChildNav().select(0);
   }
+
   goToQuoteList()
   {
     this.app.getRootNav().getActiveChildNav().select(1);
   }
+
   logout()
   {
     window.localStorage.setItem('userID','');
     window.localStorage.setItem('emailID','');
     this.app.getRootNav().setRoot(LoginPage);
+  }
+
+  showLoader()
+  {
+    this.loading1.present();
+  }
+  
+  dismissLoader()
+  {
+    this.loading1.dismiss();
   }
 }

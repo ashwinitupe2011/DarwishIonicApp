@@ -39,6 +39,7 @@ export class ItemListPage {
   
   callListResponse()
   {
+    this.events.publish('loader:presented');
     this.itemService.getItemList().then(data => {
       console.log("RefreshData:"+JSON.stringify(data));
       this.saveItemList(data);
@@ -48,6 +49,7 @@ export class ItemListPage {
   saveItemList(data)
   {
     this.items = data.responseData.response;
+    this.events.publish('loader:dismiss');
     console.log(this.items);
   }
   setFilteredItems() {
@@ -98,14 +100,7 @@ export class ItemListPage {
 
   ionViewWillEnter()
   {
-    // this.selectedItems  =[];
-    // this.http.post('http://192.168.0.103:5646/item/list',{})
-    //     .map(res => res.json())
-    //     .subscribe(data => {
-    //       this.items = data.responseData.response;
-    //       console.log("ionViewWillEnter"+JSON.stringify(data));
-    // });
-
+    this.selectedItems  =[];
     this.items ="";
     this.searchControl = new FormControl();
     this.callListResponse();

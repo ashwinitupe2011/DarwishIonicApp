@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ItemServiceProvider } from '../../providers/item-service/item-service';
 import { LoginPage } from '../login/login';
 import { Http } from '@angular/http';
+import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the OrderDetailsPage page.
@@ -22,7 +23,7 @@ export class OrderDetailsPage {
 
 	myDate: String = new Date().toISOString();
  	 shownGroup = null;
-	constructor(public navCtrl: NavController,public http:Http, public navParams: NavParams,public itemService : ItemServiceProvider) {
+	constructor(public navCtrl: NavController,public events: Events,public http:Http, public navParams: NavParams,public itemService : ItemServiceProvider) {
 		
 	}
 
@@ -48,6 +49,7 @@ export class OrderDetailsPage {
 	saveQuoteList(data)
 	{
 		this.items = data.responseData.response;
+		this.events.publish('loader:dismiss');
 	}
 
     toggleGroup(group) {
@@ -73,6 +75,7 @@ export class OrderDetailsPage {
 	// 		this.saveQuoteList(data)
     //       console.log("ionViewWillEnterQuote"+JSON.stringify(data));
 	// });
+	this.events.publish('loader:presented');
 	
 	this.getOrderDetails();
   }

@@ -62,7 +62,7 @@ export class InvoiceDetailsPage {
   }
   callLoacationAPI()
   {
-        this.geolocation.getCurrentPosition().then((resp) => {
+     this.geolocation.getCurrentPosition().then((resp) => {
      console.log("Location "+JSON.stringify(resp));
      this.lat = resp.coords.latitude;
      this.longitude = resp.coords.longitude;
@@ -110,7 +110,7 @@ export class InvoiceDetailsPage {
           text: 'Agree',
           handler: () => {
             console.log('Agree clicked');
-
+            this.events.publish('loader:presented');
             this.generateInsetItemJson(this.navParams.get("itemList"));
 
             this.insertItems(this.insertJson);
@@ -131,9 +131,9 @@ export class InvoiceDetailsPage {
 
   insertItemRespose(data)
   {
-    console.log("insert Response :"+JSON.stringify(data));
+    this.events.publish('loader:dismiss');
 
-    if(data.status)
+    if(data.status == 200)
     {
     this.navCtrl.push(InvoiceSuccessPage,{itemInfo:data.responseData.response});
     }
@@ -149,7 +149,9 @@ export class InvoiceDetailsPage {
 
   generateInsetItemJson(data)
   {
-    this.insertJson = "";
+    if(this.lat && this.longitude)
+    {
+      this.insertJson = "";
     console.log(JSON.stringify(data));
 
     for(var i =0;i<data.length;i++)
@@ -167,12 +169,21 @@ export class InvoiceDetailsPage {
     console.log(JSON.stringify(this.jsonArray));
     
     this.insertJson ={
-        "locLat" : 23.9373,
-        "locLong":45.899, 
+        "locLat" : this.lat,
+        "locLong":this.longitude, 
         "userId" : window.localStorage.getItem('userID'), 
         "status" : "requested",
         "itemList" : this.jsonArray
       };
       console.log(JSON.stringify(this.insertJson));
     }
+    else
+    {
+      let message={
+        title: 'Error',
+        msg:'Please check your location setiing. Enable your GPS.'
+       } 
+        this.events.publish('alert:presented',message );
+    }
+  }
 }
