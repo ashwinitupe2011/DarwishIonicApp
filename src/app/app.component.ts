@@ -7,8 +7,6 @@ import { AuthenticationServiceProvider } from '../providers/authentication-servi
 import { App } from 'ionic-angular';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
-import { ItemListPage } from '../pages/item-list/item-list';
-import { OrderDetailsPage } from '../pages/order-details/order-details';
 
 @Component({
   templateUrl: 'app.html'

@@ -5,8 +5,6 @@ import { ItemServiceProvider } from '../../providers/item-service/item-service'
 import 'rxjs/add/operator/debounceTime';
 import { InvoiceDetailsPage } from '../invoice-details/invoice-details';
 import { Http } from '@angular/http';
-import { LoginPage } from '../login/login';
-import { App } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 
 /**
@@ -32,7 +30,7 @@ export class ItemListPage {
 
   orderDetails : any = '';
 
-  constructor(public navCtrl: NavController,public events: Events,public appCtrl: App,public http: Http, public navParams: NavParams,public itemService : ItemServiceProvider) {
+  constructor(public navCtrl: NavController,public events: Events,public http: Http, public navParams: NavParams,public itemService : ItemServiceProvider) {
     this.items ="";
   }
   ionViewDidLoad() {

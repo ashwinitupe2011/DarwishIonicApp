@@ -4,7 +4,6 @@ import { InvoiceSuccessPage } from '../invoice-success/invoice-success';
 import { ItemServiceProvider } from '../../providers/item-service/item-service';
 
 import { Geolocation } from '@ionic-native/geolocation';
-import { TabsPage } from '../tabs/tabs';
 import { Events } from 'ionic-angular';
 
 /**
