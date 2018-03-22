@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ItemServiceProvider } from '../../providers/item-service/item-service';
 import { LoginPage } from '../login/login';
+import { Http } from '@angular/http';
 
 /**
  * Generated class for the OrderDetailsPage page.
@@ -21,18 +22,19 @@ export class OrderDetailsPage {
 
 	myDate: String = new Date().toISOString();
  	 shownGroup = null;
-	constructor(public navCtrl: NavController, public navParams: NavParams,public itemService : ItemServiceProvider) {
+	constructor(public navCtrl: NavController,public http:Http, public navParams: NavParams,public itemService : ItemServiceProvider) {
 		
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad OrderDetailsPage');
-		this.getOrderDetails();
+		// this.getOrderDetails();
 	}
 
 	getOrderDetails()
 	{
-		this.itemService.getQuoteDetails().then(data => {
+		var userID = window.localStorage.getItem('userID');
+		this.itemService.getQuoteDetails(userID).then(data => {
 			this.saveQuoteList(data);
 			});
 	}
@@ -61,5 +63,19 @@ export class OrderDetailsPage {
     };
     isGroupShown(group) {
         return this.shownGroup === group;
-    };
+	};
+	
+
+	ionViewWillEnter()
+ 	 {
+		var quoteDetailsParam = {userId:window.localStorage.getItem('userID')};
+
+		console.log("quoteDetailsParam"+JSON.stringify( quoteDetailsParam));
+    this.http.post('http://192.168.0.103:5646/item/user/list',quoteDetailsParam)
+        .map(res => res.json())
+        .subscribe(data => {
+			this.saveQuoteList(data)
+          console.log("ionViewWillEnterQuote"+JSON.stringify(data));
+    });
+  }
 }

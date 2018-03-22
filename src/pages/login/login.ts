@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationServiceProvider } from '../../providers/authentication-service/authentication-service';
 import { TabsPage } from '../tabs/tabs';
-
+import { Events } from 'ionic-angular';
 
 
 /**
@@ -28,7 +28,7 @@ export class LoginPage {
 
   loginResponse : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,public authService:AuthenticationServiceProvider) {
+  constructor(public navCtrl: NavController, public events: Events,public navParams: NavParams,public http:HttpClient,public authService:AuthenticationServiceProvider) {
 
   }
 
@@ -43,29 +43,45 @@ export class LoginPage {
       console.log("data "+data);
       });
 
-      this.callPageValidation();
+      
     }
 
     saveLoginData(data)
     {
       this.loginResponse = data;
-
       window.localStorage.setItem('userID',this.loginResponse.responseData.response.userId);
       window.localStorage.setItem('emailID',this.loginResponse.responseData.response.emailId);
 
       console.log("userId "+ window.localStorage.getItem('userID'));
       console.log("emailID "+ window.localStorage.getItem('emailID'));
+
+      this.callPageValidation();
     }
 
     callPageValidation()
     {
+      console.log("Login"+JSON.stringify(this.loginResponse));
       if(this.loginResponse)
       {
         if(this.loginResponse.status == 200)
+        {
         this.navCtrl.setRoot(TabsPage);
+        }
+        else
+        {
+        let message={
+          title: 'Error',
+          msg:'Username / password is incorrect'
+         } 
+          this.events.publish('alert:presented',message );
+        }
       }
       else{
-        alert("Username / Password is incorrect");
+        let message={
+          title: 'Error',
+          msg:'Username / password is incorrect'
+         } 
+          this.events.publish('alert:presented',message );
       }
     }
 }

@@ -7,6 +7,7 @@ import { InvoiceDetailsPage } from '../invoice-details/invoice-details';
 import { Http } from '@angular/http';
 import { LoginPage } from '../login/login';
 import { App } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the ItemListPage page.
@@ -31,7 +32,7 @@ export class ItemListPage {
 
   orderDetails : any = '';
 
-  constructor(public navCtrl: NavController,public appCtrl: App,public http: Http, public navParams: NavParams,public itemService : ItemServiceProvider) {
+  constructor(public navCtrl: NavController,public events: Events,public appCtrl: App,public http: Http, public navParams: NavParams,public itemService : ItemServiceProvider) {
     this.items ="";
   }
 
@@ -79,8 +80,19 @@ export class ItemListPage {
 
   openInvoice()
   {
-    console.log("Selected Items:"+this.selectedItems);
-    this.navCtrl.push(InvoiceDetailsPage,{itemList :this.selectedItems});
+    if(this.selectedItems.length <= 0)
+    {
+     let message={
+      title: 'Error',
+      msg:'Please select at least one item'
+     } 
+      this.events.publish('alert:presented',message );
+    }
+    else
+    {
+      console.log("Selected Items:"+this.selectedItems);
+      this.navCtrl.push(InvoiceDetailsPage,{itemList :this.selectedItems});
+    }
   }
 
   addItem(e:any,item1)
@@ -110,7 +122,8 @@ export class ItemListPage {
 
   ionViewWillEnter()
   {
-    this.http.post('http://alice.softdotcom.in:2222/item/list',{})
+    this.selectedItems  =[];
+    this.http.post('http://192.168.0.103:5646/item/list',{})
         .map(res => res.json())
         .subscribe(data => {
           this.items = data.responseData.response;

@@ -5,6 +5,7 @@ import { ItemServiceProvider } from '../../providers/item-service/item-service';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { TabsPage } from '../tabs/tabs';
+import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the InvoiceDetailsPage page.
@@ -32,7 +33,7 @@ export class InvoiceDetailsPage {
   items;
   totalPrice:number;
   
-  constructor(public navCtrl: NavController,public geolocation: Geolocation,public navParams: NavParams,public alertCtrl: AlertController,public itemService:ItemServiceProvider) {
+  constructor(public navCtrl: NavController,public events: Events,public geolocation: Geolocation,public navParams: NavParams,public alertCtrl: AlertController,public itemService:ItemServiceProvider) {
     this.initializeItems();
     this.totalPrice = 1500;
     
@@ -87,11 +88,6 @@ export class InvoiceDetailsPage {
    
   }
 
-  // onSuccess()
-  // {
-  //   alert("Order Place Succesfuly");
-  // }
-
   initializeItems() {
     this.items = this.navParams.get("itemList");
     console.log(this.items);
@@ -144,7 +140,11 @@ export class InvoiceDetailsPage {
     }
     else
     {
-      alert("Incorrect Request. Fill all details");
+      let message={
+        title: 'Error',
+        msg:'Incorrect Request. Fill all details'
+       } 
+        this.events.publish('alert:presented',message );
     }
   }
 
@@ -170,7 +170,7 @@ export class InvoiceDetailsPage {
     this.insertJson ={
         "locLat" : 23.9373,
         "locLong":45.899, 
-        "userId" : "S01294", 
+        "userId" : window.localStorage.getItem('userID'), 
         "status" : "requested",
         "itemList" : this.jsonArray
       };
