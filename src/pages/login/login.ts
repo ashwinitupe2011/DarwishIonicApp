@@ -59,16 +59,13 @@ export class LoginPage {
 
     callPageValidation()
     {
-      if(this.loginResponse.status == 200)
+      if(this.loginResponse)
       {
-       this.navCtrl.setRoot(TabsPage);
-      } 
-      else if(this.loginResponse.status == 400){
-          alert("this.loginResponse.responseData.message");
+        if(this.loginResponse.status == 200)
+        this.navCtrl.setRoot(TabsPage);
       }
-      else
-      {
-        alert("this.loginResponse.responseData.message");
+      else{
+        alert("Username / Password is incorrect");
       }
     }
 }

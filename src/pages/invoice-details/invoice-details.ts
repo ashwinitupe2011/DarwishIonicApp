@@ -101,7 +101,7 @@ export class InvoiceDetailsPage {
   confirmOrderDetails() {
     const alertConfirm = this.alertCtrl.create({
       title: 'Continue....',
-      message: 'R u sure you want to place this order',
+      message: 'Are you sure you want to continue...',
       buttons: [
         {
           text: 'Disagree',
@@ -168,8 +168,8 @@ export class InvoiceDetailsPage {
     console.log(JSON.stringify(this.jsonArray));
     
     this.insertJson ={
-        "locLat" : this.lat,
-        "locLong":this.longitude, 
+        "locLat" : 23.9373,
+        "locLong":45.899, 
         "userId" : "S01294", 
         "status" : "requested",
         "itemList" : this.jsonArray

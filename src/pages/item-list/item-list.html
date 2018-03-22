@@ -17,9 +17,14 @@
 <ion-header>
     <ion-navbar hideBackButton="true" color="primaryDark">
         <ion-title hideBackButton="true">Item List</ion-title>
+        
+        <ion-buttons end >
+          <button ion-button icon-only  (click)="logoutUser()">
+            <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+          </button></ion-buttons>
+
     </ion-navbar>
 </ion-header>
-
 
 <ion-content class="page-background transparent-header" >
     <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ItemServiceProvider } from '../../providers/item-service/item-service';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the OrderDetailsPage page.
@@ -34,6 +35,13 @@ export class OrderDetailsPage {
 		this.itemService.getQuoteDetails().then(data => {
 			this.saveQuoteList(data);
 			});
+	}
+
+	logoutUser()
+	{
+		this.navCtrl.setRoot(LoginPage);
+    	window.localStorage.setItem('userID','');
+    	window.localStorage.setItem('emailID','');
 	}
 	ngOnInit()
 	{
