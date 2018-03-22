@@ -35,28 +35,6 @@ export class ItemListPage {
   constructor(public navCtrl: NavController,public events: Events,public appCtrl: App,public http: Http, public navParams: NavParams,public itemService : ItemServiceProvider) {
     this.items ="";
   }
-
-
-  logoutUser()
-  {
-    // this.navCtrl.setRoot();
-    this.appCtrl.getRootNav().setRoot(LoginPage);
-    window.localStorage.setItem('userID','');
-    window.localStorage.setItem('emailID','');
-  }
-
-
-  ngOnInit()
-	{
-    this.items ="";
-    this.searchControl = new FormControl();
-    this.callListResponse();
-    this.setFilteredItems();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.setFilteredItems();
-  });
-  }
-  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ItemListPage');
   }
@@ -122,12 +100,20 @@ export class ItemListPage {
 
   ionViewWillEnter()
   {
-    this.selectedItems  =[];
-    this.http.post('http://192.168.0.103:5646/item/list',{})
-        .map(res => res.json())
-        .subscribe(data => {
-          this.items = data.responseData.response;
-          console.log("ionViewWillEnter"+JSON.stringify(data));
-    });
+    // this.selectedItems  =[];
+    // this.http.post('http://192.168.0.103:5646/item/list',{})
+    //     .map(res => res.json())
+    //     .subscribe(data => {
+    //       this.items = data.responseData.response;
+    //       console.log("ionViewWillEnter"+JSON.stringify(data));
+    // });
+
+    this.items ="";
+    this.searchControl = new FormControl();
+    this.callListResponse();
+    this.setFilteredItems();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.setFilteredItems();
+  });
   }
 }

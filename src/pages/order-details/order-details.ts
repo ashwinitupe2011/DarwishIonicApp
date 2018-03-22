@@ -45,10 +45,6 @@ export class OrderDetailsPage {
     	window.localStorage.setItem('userID','');
     	window.localStorage.setItem('emailID','');
 	}
-	ngOnInit()
-	{
-		 
-	}
 	saveQuoteList(data)
 	{
 		this.items = data.responseData.response;
@@ -68,14 +64,16 @@ export class OrderDetailsPage {
 
 	ionViewWillEnter()
  	 {
-		var quoteDetailsParam = {userId:window.localStorage.getItem('userID')};
+	// 	var quoteDetailsParam = {userId:window.localStorage.getItem('userID')};
 
-		console.log("quoteDetailsParam"+JSON.stringify( quoteDetailsParam));
-    this.http.post('http://192.168.0.103:5646/item/user/list',quoteDetailsParam)
-        .map(res => res.json())
-        .subscribe(data => {
-			this.saveQuoteList(data)
-          console.log("ionViewWillEnterQuote"+JSON.stringify(data));
-    });
+	// 	console.log("quoteDetailsParam"+JSON.stringify( quoteDetailsParam));
+    // this.http.post('http://192.168.0.103:5646/item/user/list',quoteDetailsParam)
+    //     .map(res => res.json())
+    //     .subscribe(data => {
+	// 		this.saveQuoteList(data)
+    //       console.log("ionViewWillEnterQuote"+JSON.stringify(data));
+	// });
+	
+	this.getOrderDetails();
   }
 }

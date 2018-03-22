@@ -1,1 +1,35 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<!-- <ion-nav [root]="rootPage"></ion-nav> -->
+
+<ion-menu side="left" [content]="content"  persistent="true">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>HIS App</ion-title>
+        </ion-toolbar>
+    </ion-header>        
+    <ion-content>
+<div class="list">
+
+        <ion-list class="label-md">
+            <button menuClose ion-item  (click)="goToHome()">
+                <img src="assets/imgs/logo.png" width="10%" /> Home
+            </button>
+
+            <button menuClose ion-item  (click)="goToItemList()">
+                <img src="assets/imgs/logo.png" width="10%" />     
+                Item List
+            </button>
+            <button menuClose ion-item  (click)="goToQuoteList()">
+                <img src="assets/imgs/logo.png" width="10%" />     
+                Quote Details
+            </button>
+            <button menuClose ion-item  (click)="logout()">
+                <img src="assets/imgs/logo.png" width="10%" />     
+                Logout
+            </button>
+            
+        </ion-list>
+        </div>
+    </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

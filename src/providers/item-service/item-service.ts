@@ -32,10 +32,10 @@ export class ItemServiceProvider {
 
   getItemList()
   {
-    if (this.itemListResponse) {
-      console.log("this.itemListResponse"+JSON.stringify(this.itemListResponse));
-      return Promise.resolve(JSON.stringify(this.itemListResponse));
-    }
+    // if (this.itemListResponse) {
+    //   console.log("this.itemListResponse"+JSON.stringify(this.itemListResponse));
+    //   return Promise.resolve(JSON.stringify(this.itemListResponse));
+    // }
  
     var itemListParam = {};
     
@@ -56,9 +56,9 @@ export class ItemServiceProvider {
   getQuoteDetails(userId)
   {
     
-    if (this.quoteDetailList) {
-      return Promise.resolve(this.quoteDetailList);
-    }
+    // if (this.quoteDetailList) {
+    //   return Promise.resolve(this.quoteDetailList);
+    // }
  
     var quoteDetailsParam = {userId:window.localStorage.getItem('userID')};
     
@@ -73,9 +73,9 @@ export class ItemServiceProvider {
   }
   insertItems(itemList)
   {
-    if (this.insertItemResponse) {
-      return Promise.resolve(this.insertItemResponse);
-    }
+    // if (this.insertItemResponse) {
+    //   return Promise.resolve(this.insertItemResponse);
+    // }
     console.log("item Param "+ JSON.stringify(itemList));
     
     return new Promise(resolve => {

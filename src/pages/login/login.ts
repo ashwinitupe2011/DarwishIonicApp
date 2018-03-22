@@ -29,7 +29,6 @@ export class LoginPage {
   loginResponse : any;
 
   constructor(public navCtrl: NavController, public events: Events,public navParams: NavParams,public http:HttpClient,public authService:AuthenticationServiceProvider) {
-
   }
 
   ionViewDidLoad() {
@@ -38,13 +37,22 @@ export class LoginPage {
 
   login()
   {
-    this.authService.userLoginRequest(this.username,this.password).then(data => {
+    if(this.username && this.password)
+    {
+      this.authService.userLoginRequest(this.username,this.password).then(data => {
       this.saveLoginData(data);
       console.log("data "+data);
       });
-
-      
+    
     }
+    else{
+      let message={
+        title: 'Error',
+        msg:'Please enter correct details'
+       } 
+       this.events.publish('alert:presented',message );
+    }
+  }
 
     saveLoginData(data)
     {
@@ -60,9 +68,6 @@ export class LoginPage {
 
     callPageValidation()
     {
-      console.log("Login"+JSON.stringify(this.loginResponse));
-      if(this.loginResponse)
-      {
         if(this.loginResponse.status == 200)
         {
         this.navCtrl.setRoot(TabsPage);
@@ -71,17 +76,9 @@ export class LoginPage {
         {
         let message={
           title: 'Error',
-          msg:'Username / password is incorrect'
+          msg:this.loginResponse.responseData.message
          } 
           this.events.publish('alert:presented',message );
         }
-      }
-      else{
-        let message={
-          title: 'Error',
-          msg:'Username / password is incorrect'
-         } 
-          this.events.publish('alert:presented',message );
-      }
     }
 }

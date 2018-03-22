@@ -34,9 +34,9 @@ export class AuthenticationServiceProvider {
 
   userLoginRequest(userId,password)
   {
-    if (this.loginData) {
-      return Promise.resolve(this.loginData);
-    }
+    // if (this.loginData) {
+    //   return Promise.resolve(this.loginData);
+    // }
  
     var userDataParam = {userId:userId,password:password};
     
@@ -46,7 +46,12 @@ export class AuthenticationServiceProvider {
         .subscribe(data => {
           this.loginData = data;
           resolve(this.loginData);
-        });
+        },
+        error => 
+      {
+        console.log("Error"+JSON.stringify(error.json()));
+        resolve(error.json())
+      });
     });
   }
 }

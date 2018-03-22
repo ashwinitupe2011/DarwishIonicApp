@@ -14,7 +14,7 @@
 </ion-header> -->
 
 
-<ion-header>
+<!-- <ion-header>
     <ion-navbar hideBackButton="true" color="primaryDark">
         <ion-title hideBackButton="true">Item List</ion-title>
         
@@ -24,6 +24,17 @@
           </button></ion-buttons>
 
     </ion-navbar>
+</ion-header> -->
+
+<ion-header >
+  <ion-navbar color="primaryDark">
+      <ion-buttons left>
+          <button ion-button menuToggle>
+              <ion-icon name="menu"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>Appointmnet Summary</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content class="page-background transparent-header" >
@@ -51,9 +62,9 @@
           </ion-col>
        
 
-          <ion-col col-4 class="text">
+          <ion-col class="text">
               <p class="name">{{item.itemName}}</p>
-            <p class="itemName" >{{item.unitPrice | currency:'INR':'&#83977;'}}/unit</p>
+              <p class="itemName" >{{item.unitPrice | currency:'INR':'&#83977;'}}/unit</p>
               <p class="itemName">{{item.quantityAvailable}}</p>
             </ion-col>
         </ion-row>
